@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"\u5617\u8a66\u5beb\u4e00\u7bc7\u6587\u7ae0","permalink":"/obBlog/blog/2024/11/30/\u5617\u8a66\u5beb\u4e00\u7bc7\u6587\u7ae0"}]}')}}]);
