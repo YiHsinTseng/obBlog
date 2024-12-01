@@ -3,6 +3,7 @@ aliases:
 authors: easontseng
 tags:
   - "#obsidian"
+enableComments: "true"
 ---
 
 Obsidian 作為便捷的 md 編輯器，如果想要將 md 文章部署上網，除了其官方的 Obsidian Publish 服務外，還可以透過 [Obsidiosaurus 專案](https://cimsta.github.io/obsidiosaurus-docs/docs/main/Get%20started/quick_start) 將 Obsidian 筆記以 Docusaurus Blog 形式輕鬆部署到 Github Pages 上。
@@ -58,12 +59,55 @@ https://docusaurus.io/docs/docs-introduction#docs-only-mode
 此時 main 分支的 Github Actions 腳本會執行 `npm run build` 後，並轉而透過 `peaceiris/actions-gh-pages` 將內容以 gh-pages 分支形式自動部署到 Github Pages 上。
 #### 以 deploy 指令
 
-以 `npm run deploy` 透過 Docusaurus 本身的功能來自動化佈署到 Github Page。
+以 `npm run deploy` 透過 Docusaurus 本身的功能來自動化佈署到 Github Pages。
 ## Obsidiain 書寫注意
 
 一些特殊符號即便在 Obsidian 允許，但經過 Obsidiosaurus 外掛處理後，最終用於 Docusaurus 可能不如預期。例如要避免在標題使用 `()`，如 `mdName(XXX)` 就會引發錯誤。
 
 而 Obsidian 中 internal link 和 link to heading (`mdName#heading`) 的功能，還是需要透過提示操作來轉成 Markdown link 格式 `[]()`，不支援 Wiki link 格式 `[[]]`。
+
+## 加入 giscus 留言板
+
+參考以下連結設定 Blog 留言板，並且也自行研究設置 Doc 留言板。
+https://m19v.github.io/blog/how-to-add-giscus-to-docusaurus
+
+### build 時錯誤原因
+
+注意可能會發生 Can't resolve 'react/jsx-runtime' 的問題，目前解法是引入外掛 `@cookbookdev/docusaurus-jsx-runtime-fallback-plugin` 來解決。
+
+```js
+//docusaurus.config.js
+   plugins: [
+      [
+        '@docusaurus/plugin-content-blog',
+        {
+          id: 'release_notes',
+          routeBasePath: 'release_notes',
+          path: './release_notes__blog',
+        },
+      ],
+      [
+        '@cookbookdev/docusaurus-jsx-runtime-fallback-plugin',
+        {
+          alias: {
+            'react/jsx-runtime': 'react/jsx-runtime.js',
+          },
+        },
+      ],
+    ],
+```
+
+### Blog 留言板潛在問題
+
+在 `src/theme/BlogPostItem/index.tsx`ˊ中，
+`isBlogPostPage` 屬性無法被讀取，因此選擇先移除。
+且要修正用 `enableComments === "true"` 作為在 Obsidian 中以 md frontmatter 控制的設定。
+### Doc 留言板潛在問題
+
+由於版本兼容問題 "@docusaurus/core": "2.4.1" 在使用 useDoc 時會有錯誤。目前解法是暫時不用 frontmatter 資訊選擇關閉 Doc 的留言區。
+
+https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues/637
+
 ## TODO
 
 目前我對 Docusaurus 的 功能沒有研究很深，所以以下是我後續希望研究的功能：

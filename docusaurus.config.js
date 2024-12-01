@@ -143,7 +143,14 @@ const config = {
           routeBasePath: 'release_notes',
           path: './release_notes__blog',
         },
-        
+      ],
+      [
+        '@cookbookdev/docusaurus-jsx-runtime-fallback-plugin',
+        {
+          alias: {
+            'react/jsx-runtime': 'react/jsx-runtime.js',
+          },
+        },
       ],
     ],
     markdown: {
