@@ -4,8 +4,9 @@ aliases:
 authors: easontseng
 tags:
   - "#obsidian"
-enableComments: "true"
-last_update: {"date":"2024-12-02"}
+enableComments: "false"
+last_update:
+  date: 2024-12-02
 ---
 
 Obsidian 作為便捷的 Markdown (以下簡稱 MD) 編輯器，如果想要將 MD 文章部署上網，除了其官方的 Obsidian Publish 服務外，還可以透過 [Obsidiosaurus 專案](https://cimsta.github.io/obsidiosaurus-docs/docs/main/Get%20started/quick_start) ，將 Obsidian 筆記以 Docusaurus Blog 形式輕鬆部署到 Github Pages 上。
