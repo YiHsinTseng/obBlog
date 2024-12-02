@@ -8,6 +8,7 @@
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
+    "d": "docusaurus deploy && docker run --platform linux/amd64 -it --env-file=./algolia/.env -e CONFIG=\"$(cat ./algolia/config.json | jq -r tostring)\" algolia/docsearch-scraper",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",

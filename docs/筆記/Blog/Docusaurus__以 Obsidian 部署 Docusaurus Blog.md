@@ -134,6 +134,46 @@ https://m19v.github.io/blog/how-to-add-giscus-to-docusaurus
 
 https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues/637
 
+## 使用 Algolia 優化站內搜尋
+
+Algolia 是一個托管搜索引擎，使用者需要將結構化資料上傳到 Algolia，以利於透過 Algolia API 藉由關鍵字搜尋，重新導向特定網頁。
+
+在 Docusaurus 有 [外掛](https://docusaurus.io/docs/search#using-algolia-docsearch) 支持使用 Algolia DocSearch，以下內容將討論自己如何執行 DocSearch 爬蟲。
+###  使用 algolia/docsearch-scraper 自行爬蟲
+
+Algolia 提供了一個 Docker image `algolia/docsearch-scraper`，用於自動抓取網站內容並生成符合 Algolia 要求的結構化資料。
+### 開始設置環境
+
+可以參考這個 [設置教學](https://weiyun0912.github.io/Wei-Docusaurus/docs/Docusaurus/Algolia/)，以下簡單描述大致流程以及注意事項：
+1. 註冊 Algolia 並創建允許特定權限的 api key
+2. 安裝 `Jq` 用於將設定的 JSON 檔轉換成 command-line
+	- `brew install jq` (mac)
+3. 設定 `.env` ,` config.json` 以利於 `algolia/docsearch-scraper` 使用。
+4. 執行 `algolia/docsearch-scraper` ，以便根據設定將爬取網頁生成結構化資料上傳到 Algolia。
+	- ⚠️ Warning: 
+		- mac M1 需要在 docker 指令前加入 `--platform linux/amd64`。
+	- 完整形式如：
+	```shell
+	docker run --platform linux/amd64 -it --env-file=.env -e "CONFIG=$(cat config.json | jq -r tostring)" algolia/docsearch-scraper
+	```
+5. 若以上流程順利執行，就可以在 Algolia 看到你索引資料了。
+### 建議使用流程
+
+因此若要讓 Docusaurus 可以自動化部署與建立索引，有兩種可行的做法：
+- `git push` 觸發 Github Actions 自動化
+	- Github Actions 在執行文章自動化部署的同時，透過額外加入 Action 執行 `algolia/docsearch-scraper ` 實現新文章的索引更新。
+- 利用 `package.json script` 自定義命令 (建議使用)
+	- 自定義腳本，將原先的 `npm run deploy` 與 local 端執行 `algolia/docsearch-scraper` 的 Docker 操作腳本。
+
+:::tip
+
+若要結合部署與索引兩個指令，在新建索引指令的 CONFIG 部分需要以 `\` 轉義雙引號，以免識別錯誤。形式如：
+```
+//package.json
+"deploy-index": "docusaurus deploy && docker run --platform linux/amd64 -it --env-file=./yourpath/.env -e CONFIG=\"$(cat ./yourpath/config.json | jq -r tostring)\" algolia/docsearch-scraper",
+```
+:::
+
 ## 更好地寫作部署
 
 可以搭配 Obsidian 中的 [Terminal 外掛](https://github.com/polyipseity/obsidian-terminal) 在 Obsidian vault 中設定 website 資料夾為目錄（透過視窗右鍵編輯重設），方便使用 `npm run build`、`npm run start` 以及 `npm run deploy` 來測試以及部署。
@@ -142,8 +182,6 @@ https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues/637
 
 目前我對 Docusaurus 的 功能沒有研究很深，所以以下是我後續希望研究的功能：
 
-- [ ] 設定 search
-	- https://medium.com/@weiyun0912/docusaurus-%E5%9C%A8-docusaurus-%E4%B8%AD%E4%BD%BF%E7%94%A8-algolia-%E5%AF%A6%E4%BD%9C%E6%90%9C%E5%B0%8B%E5%8A%9F%E8%83%BD-4953b6ed4c34
 - [ ] 將專案適配到新版 Docusaurus
 - [ ] 解決 giscus 留言板無法透過 frontmatter 手動關閉 (useDoc 錯誤)
 
