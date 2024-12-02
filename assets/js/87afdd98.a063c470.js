@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkobBlog=self.webpackChunkobBlog||[]).push([[7130],{6792:s=>{s.exports=JSON.parse('{"authors":[{"name":"easontseng","title":"YiHsinTseng","url":"https://github.com/YiHsinTseng","email":"yhsints@gmail.com)","imageURL":"https://github.com/YiHsinTseng.png","key":"easontseng","page":null,"count":1}]}')}}]);
