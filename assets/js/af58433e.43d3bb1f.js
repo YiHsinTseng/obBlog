@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkobBlog=self.webpackChunkobBlog||[]).push([[318],{365:o=>{o.exports=JSON.parse('{"metadata":{"permalink":"/obBlog/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
