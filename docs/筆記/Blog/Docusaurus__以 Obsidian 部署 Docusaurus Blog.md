@@ -130,9 +130,9 @@ https://m19v.github.io/blog/how-to-add-giscus-to-docusaurus
 且要修正用 `enableComments === "true"` 作為在 Obsidian 中以 MD frontmatter 控制的設定。
 ### Doc 留言板潛在問題
 
-由於版本兼容問題 "@docusaurus/core": "2.4.1" 在使用 useDoc 時會有錯誤。目前解法是暫時不用 frontmatter 資訊選擇關閉 Doc 的留言區。
+主要設置在 `src/theme/DocItem/Footer/index.tsx`ˊ中，只有正確設置才能避免 useDoc 錯誤問題，此並非版本兼容問題。可以參考以下連結：
 
-https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues/637
+https://ouch1978.github.io/docs/docusaurus/customization/add-giscus-to-docusaurus
 
 ## 使用 Algolia 優化站內搜尋
 
@@ -182,6 +182,8 @@ Algolia 提供了一個 Docker image `algolia/docsearch-scraper`，用於自動
 
 目前我對 Docusaurus 的 功能沒有研究很深，所以以下是我後續希望研究的功能：
 
-- [ ] 將專案適配到新版 Docusaurus
-- [ ] 解決 giscus 留言板無法透過 frontmatter 手動關閉 (useDoc 錯誤)
+- [x] 將專案適配到新版 Docusaurus
+	- [ ] 新版 3.6 的移動端 Nav 與 button 無法使用
+- [x] 只有新版 Docusaurus 的 sitemap.xml 可以設置 `lastmod` 屬性，可能導致 google search console 無法順利解析。
+- [ ] google search console 還是無法讀取到 sitemap.xml。
 
