@@ -49,7 +49,13 @@ const config = {
         gtag: {
         trackingID: 'G-3H54V80CKQ',
         anonymizeIP: true,
-      },
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+        },
       }),
     ],
   ],
