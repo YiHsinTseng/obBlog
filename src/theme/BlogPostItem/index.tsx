@@ -8,7 +8,7 @@ export default function BlogPostItemWrapper(props) {
   const isBrowser = useIsBrowser();
   
   const { metadata } = useBlogPost()
-  const { frontMatter, slug, title } = metadata
+  const { frontMatter, permalink } = metadata
   const { enableComments } = frontMatter
 
   return (

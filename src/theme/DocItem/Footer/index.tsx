@@ -11,7 +11,7 @@ type Props = WrapperProps<typeof FooterType>;
 export default function DocItemWrapper(props):JSX.Element {
 
   const { metadata } = useDoc()//error
-  const { frontMatter, slug, title } = metadata
+  const { frontMatter, permalink } = metadata
   const { enableComments } = frontMatter
   return (
     <>
