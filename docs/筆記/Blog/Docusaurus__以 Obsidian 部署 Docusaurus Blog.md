@@ -4,9 +4,9 @@ aliases:
 authors: easontseng
 tags:
   - "#obsidian"
-enableComments: true
-draft: true
-last_update: {"date":"2024-12-03"}
+enableComments: "true"
+draft: false
+last_update: {"date":"2024-12-04"}
 ---
 
 Obsidian 作為便捷的 Markdown (以下簡稱 MD) 編輯器，如果想要將 MD 文章部署上網，除了其官方的 Obsidian Publish 服務外，還可以透過 [Obsidiosaurus 專案](https://cimsta.github.io/obsidiosaurus-docs/docs/main/Get%20started/quick_start) ，將 Obsidian 筆記以 Docusaurus Blog 形式輕鬆部署到 Github Pages 上。
@@ -41,7 +41,7 @@ brew install ghostscript
 ---
 ## 自定義首頁為特定 MD 檔案
 
-由於 Docusaurus 通常會有一個由 React 寫成的首頁，因此如果只是單純想用 MD 當首頁，需要修改原先的根目錄註解掉，將 index.tsx 的部分改成一段重導向程式碼，並且將 docs 的資料夾中你希望作為首頁的 MD 檔案 中 `fronter matter` 的欄位設定 `slug: /`。
+由於 Docusaurus 通常會有一個由 React 寫成的首頁，因此如果只是單純想用 MD 當首頁，需要修改原先的根目錄註解掉，將 index.tsx 的部分改成一段重導向程式碼，並且將 docs 的資料夾中你希望作為首頁的 MD 檔案 中 `front matter` 的欄位設定 `slug: /`。
 
 https://docusaurus.io/docs/docs-introduction#docs-only-mode
 
@@ -55,6 +55,12 @@ https://docusaurus.io/docs/docs-introduction#docs-only-mode
 
 如果是修改 Obsidian 文章則只要按 Obsidiosaurus 外掛按鈕，只要確保你一直處在 `npm run start` ，就可以在 local server 看到變化。
 
+:::warning
+
+如果在 Obsidian MD 的 front matter 設定 `draft: true`，以至於所有目錄中都沒有非草稿狀態的 MD 檔案，那麼 `npm run build` 就會出現以下錯誤:
+`[WARNING] No docs found in "你的目錄": can't auto-generate a sidebar`
+:::
+
 ### 自動部署到 Github Pages
 
 #### 以 git push 形式
@@ -67,10 +73,8 @@ https://docusaurus.io/docs/docs-introduction#docs-only-mode
 
 如果還是希望兼容 git push 自動部署與正確顯示更新日期，可以設置 last_update 屬性來硬性指令更新日期。
 
- Linter 外掛支援自動更新 FrontMatter 屬性，因此只要 Linter 外掛中設定 `Date Modified Key` 為 `last_update`，模板 `Format` 為 `{"\d\a\t\e":"YYYY-MM-DD"}`，就可以確保正確顯示更新日期。同時在將 `YAML Keys to Remove` 加入 `last_update`，這樣就可以避免修正其他屬性時導致 `last_update` 格式更新錯誤。
+ Linter 外掛支援自動更新 front matter 屬性，因此只要 Linter 外掛中設定 `Date Modified Key` 為 `last_update`，模板 `Format` 為 `{"\d\a\t\e":"YYYY-MM-DD"}`，就可以確保正確顯示更新日期。同時在將 `YAML Keys to Remove` 加入 `last_update`，這樣就可以避免修正其他屬性時導致 `last_update` 格式更新錯誤。
 :::
-
-
 
 #### 以 deploy 指令（建議使用）
 
@@ -85,7 +89,7 @@ https://docusaurus.io/docs/docs-introduction#docs-only-mode
 
 ###  標題受限可用符號，可善用 title 屬性
 
-Obsidian 本身不支持在標題使用 `[]`， 因此需要透過 FrontMatter 中 `title` 屬性來協助修改標題。
+Obsidian 本身不支持在標題使用 `[]`， 因此需要透過 front matter 中 `title` 屬性來協助修改標題。
 
 即便在 Obsidian 中一些特殊符號被允許在標題輸入，但由於有 Obsidiosaurus 外掛處理以及 Docusaurus 轉換成靜態網頁的過程，可能導致潛在錯誤。例如要避免在標題使用 `()`，如 `MDName(XXX)` ；或是在標題開頭使用 `<>`，以免被誤認為是 React Component。
 ###  使用連結時依彈出提示操作
@@ -130,7 +134,7 @@ https://m19v.github.io/blog/how-to-add-giscus-to-docusaurus
 
 在 `src/theme/BlogPostItem/index.tsx` 中，
 `isBlogPostPage` 屬性無法被讀取，因此選擇先移除。
-且要修正用 `enableComments === "true"` 作為在 Obsidian 中以 MD frontmatter 控制的設定。
+且要修正用 `enableComments === "true"` 作為在 Obsidian 中以 MD front matter 控制的設定。
 ### Doc 留言板潛在問題
 
 主要設置在 `src/theme/DocItem/Footer/index.tsx` 中，只有正確設置才能避免 useDoc 錯誤問題，此並非版本兼容問題。可以參考以下連結：
