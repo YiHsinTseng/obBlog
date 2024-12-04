@@ -2,9 +2,9 @@
 title: "[Vercel] 如何將Node.js後端專案部署到Vercel"
 aliases: 
 authors: easontseng
-enableComments: true
+enableComments: "true"
 draft: true
-last_update: {"date":"2024-12-03"}
+last_update: {"date":"2024-12-04"}
 ---
 
 ## 目標

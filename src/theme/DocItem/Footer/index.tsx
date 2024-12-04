@@ -8,9 +8,9 @@ import type FooterType from "@theme/DocItem/Footer";
 import type { WrapperProps } from "@docusaurus/types";
 type Props = WrapperProps<typeof FooterType>;
 
-export default function DocItemWrapper(props):JSX.Element {
+export default function DocItemWrapper(props){
 
-  const { metadata } = useDoc()//error
+  const { metadata } = useDoc()
   const { frontMatter, permalink } = metadata
   const { enableComments } = frontMatter
   return (
