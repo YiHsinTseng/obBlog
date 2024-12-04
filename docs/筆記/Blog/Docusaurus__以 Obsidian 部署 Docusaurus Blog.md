@@ -4,8 +4,9 @@ aliases:
 authors: easontseng
 tags:
   - "#obsidian"
-enableComments: "true"
-last_update: {"date":"2024-12-02"}
+enableComments: true
+draft: true
+last_update: {"date":"2024-12-03"}
 ---
 
 Obsidian 作為便捷的 Markdown (以下簡稱 MD) 編輯器，如果想要將 MD 文章部署上網，除了其官方的 Obsidian Publish 服務外，還可以透過 [Obsidiosaurus 專案](https://cimsta.github.io/obsidiosaurus-docs/docs/main/Get%20started/quick_start) ，將 Obsidian 筆記以 Docusaurus Blog 形式輕鬆部署到 Github Pages 上。
@@ -28,7 +29,7 @@ Obsidian 作為便捷的 Markdown (以下簡稱 MD) 編輯器，如果想要將 
 但如果沒有想要太多客製化的話，單純改一改專案中的個人設定還是可以簡單上手。
 ### 專案本身的使用限制
 
-目前 [Obsidiosaurus 專案](https://cimsta.github.io/obsidiosaurus-docs/docs/main/Get%20started/quick_start)  開發者支援的 Docusaurus 版本為 "@docusaurus/core": "2.4.1"，但最新的 Docusaurus 版本是 3.6，因此如果想要使用 Docusaurus 3.6 的功能並無法直接兼容，需要自行研究。
+目前 [Obsidiosaurus 專案](https://cimsta.github.io/obsidiosaurus-docs/docs/main/Get%20started/quick_start)  開發者支援的 Docusaurus 版本為 "@docusaurus/core": "2.4.1"，但最新的 Docusaurus 版本是 3.6，因此如果想要使用 Docusaurus 3.6 的功能並無法直接兼容，需要自行研究，而且 3.6 版本中可能隱含一些小 bug (移動端無法正常點擊側邊欄)。
 
 ### 預先安裝相依套件 (以 mac 為例)
 
@@ -66,8 +67,10 @@ https://docusaurus.io/docs/docs-introduction#docs-only-mode
 
 如果還是希望兼容 git push 自動部署與正確顯示更新日期，可以設置 last_update 屬性來硬性指令更新日期。
 
- Linter 外掛支援自動更新 FrontMatter 屬性，因此只要 Linter 外掛中設定 `Date Modified Key` 為 `last_update`，模板 `Format` 為 `{"\d\a\t\e":"YYYY-MM-DD"}`，就可以確保正確顯示更新日期。
+ Linter 外掛支援自動更新 FrontMatter 屬性，因此只要 Linter 外掛中設定 `Date Modified Key` 為 `last_update`，模板 `Format` 為 `{"\d\a\t\e":"YYYY-MM-DD"}`，就可以確保正確顯示更新日期。同時在將 `YAML Keys to Remove` 加入 `last_update`，這樣就可以避免修正其他屬性時導致 `last_update` 格式更新錯誤。
 :::
+
+
 
 #### 以 deploy 指令（建議使用）
 
@@ -125,12 +128,12 @@ https://m19v.github.io/blog/how-to-add-giscus-to-docusaurus
 
 ### Blog 留言板潛在問題
 
-在 `src/theme/BlogPostItem/index.tsx`ˊ中，
+在 `src/theme/BlogPostItem/index.tsx` 中，
 `isBlogPostPage` 屬性無法被讀取，因此選擇先移除。
 且要修正用 `enableComments === "true"` 作為在 Obsidian 中以 MD frontmatter 控制的設定。
 ### Doc 留言板潛在問題
 
-主要設置在 `src/theme/DocItem/Footer/index.tsx`ˊ中，只有正確設置才能避免 useDoc 錯誤問題，此並非版本兼容問題。可以參考以下連結：
+主要設置在 `src/theme/DocItem/Footer/index.tsx` 中，只有正確設置才能避免 useDoc 錯誤問題，此並非版本兼容問題。可以參考以下連結：
 
 https://ouch1978.github.io/docs/docusaurus/customization/add-giscus-to-docusaurus
 
@@ -183,7 +186,7 @@ Algolia 提供了一個 Docker image `algolia/docsearch-scraper`，用於自動
 目前我對 Docusaurus 的 功能沒有研究很深，所以以下是我後續希望研究的功能：
 
 - [x] 將專案適配到新版 Docusaurus
-	- [ ] 新版 3.6 的移動端 Nav 與 button 無法使用
-- [x] 只有新版 Docusaurus 的 sitemap.xml 可以設置 `lastmod` 屬性，可能導致 google search console 無法順利解析。
-- [ ] google search console 還是無法讀取到 sitemap.xml。
+	- [ ] 新版 3.6 的移動端側邊欄與按鈕無法使用
+- [x] 只有新版 Docusaurus 的 sitemap.xml 可以設置 `lastmod` 屬性，不確定是否導致 google search console 無法順利解析。
+- [ ] google search console 還是無法讀取到 sitemap.xml，但可以透過網頁審查功能要求索引特定網頁。
 

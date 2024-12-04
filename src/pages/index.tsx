@@ -6,18 +6,18 @@ export default function Home(): JSX.Element {
   const history = useHistory();
 
   useEffect(() => {
-    // 直接重定向到 /docs/
-    history.push('/obBlog/docs/');
+    // 直接重定向到 /docs
+    history.push('/obBlog/docs');
   }, [history]);
 
   return (
     <Layout
       title={`Redirecting...`}
       description="Redirecting to documentation...">
-      <main>
+      {/* <main>
         <h1>Redirecting...</h1>
         <p>If you are not redirected, <a href="/docs">click here</a>.</p>
-      </main>
+      </main> */}
     </Layout>
   );
 }
