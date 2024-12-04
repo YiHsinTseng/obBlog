@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[237],{9754:(e,t,c)=>{c.r(t),c.d(t,{default:()=>u});var i=c(7294),n=c(6550),s=c(6005);function u(){const e=(0,n.k6)();return(0,i.useEffect)((()=>{e.push("/obBlog/docs")}),[e]),i.createElement(s.Z,{title:"Redirecting...",description:"Redirecting to documentation..."})}}}]);
