@@ -74,18 +74,18 @@ const config = {
     ({
       image: 'img/obsidiosaurus-social-card.jpg',
       navbar: {
-        title: 'YIHSIN',
+        // title: 'YIHSIN',
         logo: {
           alt: 'logo',
           src: 'img/yihsinblog.svg',
         },
         items: [
-          // {
-          //   type: 'docSidebar',
-          //   sidebarId: 'about',
-          //   position: 'left',
-          //   label: 'YIHSIN',
-          // },
+          {
+            type: 'docSidebar',
+            sidebarId: 'about',
+            position: 'left',
+            label: 'YIHSIN',
+          },
           // {
           //   type: 'docSidebar',
           //   sidebarId: 'portfolio',

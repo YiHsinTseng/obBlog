@@ -22,6 +22,8 @@ yarn-error.log*
 .history
 
 # MD folder
-/docs
-/blog/*
-!/blog/authors.yml
+static/assets
+docs
+blog/*
+!blog/authors.yml
+.github/workflows/deploy.yml
