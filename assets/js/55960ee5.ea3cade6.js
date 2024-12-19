@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[121],{8070:e=>{e.exports=JSON.parse('[{"label":"Alg-binary_search","permalink":"/obBlog/docs/tags/alg-binary-search","count":1},{"label":"obsidian","permalink":"/obBlog/docs/tags/obsidian","count":1}]')}}]);
